@@ -12,47 +12,50 @@ class ColorAndSize extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Color"),
-              Row(
-                children: [
-                  ColorDot(
-                    color: Colors.blue,
-                  ),
-                  ColorDot(
-                    color: Colors.cyan,
-                  ),
-                  ColorDot(
-                    color: Colors.amber,
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
-        Expanded(
-          child: RichText(
-            text: TextSpan(
-              style: TextStyle(color: kTextColor),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextSpan(text: "Size\n"),
-                TextSpan(
-                  text: "${product.size} cm",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5!
-                      .copyWith(fontWeight: FontWeight.bold),
+                Text("Color"),
+                Row(
+                  children: [
+                    ColorDot(
+                      color: Colors.blue,
+                    ),
+                    ColorDot(
+                      color: Colors.cyan,
+                    ),
+                    ColorDot(
+                      color: Colors.amber,
+                    )
+                  ],
                 )
               ],
             ),
           ),
-        ),
-      ],
+          Expanded(
+            child: RichText(
+              text: TextSpan(
+                style: TextStyle(color: kTextColor),
+                children: [
+                  TextSpan(text: "Size\n"),
+                  TextSpan(
+                    text: "${product.size} cm",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

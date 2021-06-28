@@ -1,4 +1,7 @@
+import 'package:ecom/const.dart';
 import 'package:ecom/models/product.dart';
+import 'package:ecom/screens/components/buttonandcart.dart';
+import 'package:ecom/screens/components/cart_counter.dart';
 import 'package:ecom/screens/components/colorandsize.dart';
 import 'package:ecom/screens/components/product_title.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +34,29 @@ class ItemBody extends StatelessWidget {
                         height: 95,
                       ),
                       ColorAndSize(product: product),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: kDefaultPaddin,
+                            vertical: kDefaultPaddin),
+                        child: Text(
+                          product.description,
+                          style: TextStyle(height: 1.5),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CartCounter(),
+                          Container(
+                            margin: EdgeInsets.only(right: kDefaultPaddin),
+                            child: Icon(
+                              Icons.favorite,
+                              color: Colors.red[400],
+                            ),
+                          ),
+                        ],
+                      ),
+                      ButtonAndCart(product: product)
                     ],
                   ),
                 ),
