@@ -43,9 +43,12 @@ class ProductTitle extends StatelessWidget {
                 width: kDefaultPaddin,
               ),
               Expanded(
-                  child: Image.asset(
-                product.image,
-                fit: BoxFit.fill,
+                  child: Hero(
+                tag: "id-${product.image}",
+                child: Image.asset(
+                  product.image,
+                  fit: BoxFit.fill,
+                ),
               ))
             ],
           )

@@ -17,20 +17,20 @@ class Details extends StatelessWidget {
           backgroundColor: product.color,
           elevation: 0,
           leading: IconButton(
-            icon: SvgPicture.asset("icons/back.svg"),
+            icon: SvgPicture.asset("assets/icons/back.svg"),
             onPressed: () => Navigator.pop(context),
           ),
           actions: [
             IconButton(
                 onPressed: () {},
                 icon: SvgPicture.asset(
-                  "icons/search.svg",
+                  "assets/icons/search.svg",
                   color: kTextColor,
                 )),
             IconButton(
                 onPressed: () {},
                 icon: SvgPicture.asset(
-                  "icons/cart.svg",
+                  "assets/icons/cart.svg",
                   color: kTextColor,
                 )),
             SizedBox(

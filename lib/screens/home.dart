@@ -16,13 +16,13 @@ class HomeScreen extends StatelessWidget {
           IconButton(
               onPressed: () {},
               icon: SvgPicture.asset(
-                "icons/search.svg",
+                "assets/icons/search.svg",
                 color: kTextColor,
               )),
           IconButton(
               onPressed: () {},
               icon: SvgPicture.asset(
-                "icons/cart.svg",
+                "assets/icons/cart.svg",
                 color: kTextColor,
               )),
           SizedBox(
