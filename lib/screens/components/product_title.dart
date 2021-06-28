@@ -1,5 +1,6 @@
 import 'package:ecom/const.dart';
 import 'package:ecom/models/product.dart';
+import 'package:ecom/responsive.dart';
 import 'package:flutter/material.dart';
 
 class ProductTitle extends StatelessWidget {
@@ -12,8 +13,8 @@ class ProductTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: kDefaultPaddin),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -25,7 +26,7 @@ class ProductTitle extends StatelessWidget {
             product.title,
             style: Theme.of(context)
                 .textTheme
-                .headline4!
+                .headline5!
                 .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           Row(
@@ -33,7 +34,7 @@ class ProductTitle extends StatelessWidget {
               RichText(
                   text: TextSpan(children: [
                 TextSpan(
-                    text: "Price\n", style: TextStyle(color: Colors.white)),
+                    text: "Price\n\n", style: TextStyle(color: Colors.white)),
                 TextSpan(
                     text: "\$${product.price}\n",
                     style: Theme.of(context).textTheme.headline4!.copyWith(
@@ -44,10 +45,24 @@ class ProductTitle extends StatelessWidget {
               ),
               Expanded(
                   child: Hero(
-                tag: "id-${product.image}",
+                tag: "id-${product.image}-${product.id}",
                 child: Image.asset(
                   product.image,
-                  fit: BoxFit.fill,
+                  //fit: BoxFit.fill,
+                  width: Responsive.isMobile(context)
+                      ? MediaQuery.of(context).size.height < 700
+                          ? MediaQuery.of(context).size.height < 600
+                              ? 200
+                              : 250
+                          : 300
+                      : 400,
+                  height: Responsive.isMobile(context)
+                      ? MediaQuery.of(context).size.height < 700
+                          ? MediaQuery.of(context).size.height < 600
+                              ? 200
+                              : 250
+                          : 300
+                      : 400,
                 ),
               ))
             ],

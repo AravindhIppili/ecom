@@ -27,8 +27,10 @@ class ItemCard extends StatelessWidget {
                     color: product.color,
                     borderRadius: BorderRadius.circular(16)),
                 child: Hero(
-                    tag: "id-${product.image}",
-                    child: Image.asset(product.image))),
+                    tag: "id-${product.image}-${product.id}",
+                    child: Image.asset(
+                      product.image,
+                    ))),
           ),
           Padding(
             padding: const EdgeInsets.all(kDefaultPaddin / 4),

@@ -1,5 +1,6 @@
 import 'package:ecom/const.dart';
 import 'package:ecom/models/product.dart';
+import 'package:ecom/responsive.dart';
 import 'package:ecom/screens/components/buttonandcart.dart';
 import 'package:ecom/screens/components/cart_counter.dart';
 import 'package:ecom/screens/components/colorandsize.dart';
@@ -21,8 +22,12 @@ class ItemBody extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity,
-                  margin: EdgeInsets.only(top: size.height * 0.3),
-                  height: size.height * 0.7,
+                  margin: Responsive.isMobile(context)
+                      ? EdgeInsets.only(top: size.height * 0.3)
+                      : EdgeInsets.only(top: size.height * 0.4),
+                  height: Responsive.isMobile(context)
+                      ? size.height * 0.7
+                      : size.height * 0.6,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
