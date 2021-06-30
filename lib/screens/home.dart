@@ -1,5 +1,6 @@
 import 'package:ecom/const.dart';
 import 'package:ecom/screens/components/body.dart';
+import 'package:ecom/screens/view_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,12 +19,17 @@ class HomeScreen extends StatelessWidget {
               icon: SvgPicture.asset(
                 "assets/icons/search.svg",
                 color: kTextColor,
+                cacheColorFilter: true,
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ViewCart()));
+              },
               icon: SvgPicture.asset(
                 "assets/icons/cart.svg",
                 color: kTextColor,
+                cacheColorFilter: true,
               )),
           SizedBox(
             width: kDefaultPaddin / 2,
@@ -38,6 +44,7 @@ class HomeScreen extends StatelessWidget {
               .copyWith(fontWeight: FontWeight.bold),
         ),
       ),
+      backgroundColor: Colors.white,
       body: Body(),
     );
   }

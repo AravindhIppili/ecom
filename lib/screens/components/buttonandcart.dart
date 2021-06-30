@@ -1,5 +1,6 @@
 import 'package:ecom/const.dart';
 import 'package:ecom/models/product.dart';
+import 'package:ecom/screens/view_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -28,8 +29,12 @@ class ButtonAndCart extends StatelessWidget {
               icon: SvgPicture.asset(
                 "assets/icons/cart.svg",
                 color: product.color,
+                cacheColorFilter: true,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ViewCart()));
+              },
             ),
           ),
           Expanded(
