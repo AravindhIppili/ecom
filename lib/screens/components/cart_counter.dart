@@ -1,40 +1,57 @@
+import 'package:ecom/add_to_cart.dart';
 import 'package:ecom/const.dart';
+import 'package:ecom/models/cart.dart';
+import 'package:ecom/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CartCounter extends StatefulWidget {
-  const CartCounter({Key? key}) : super(key: key);
+  final int id;
+  const CartCounter({required this.id, Key? key}) : super(key: key);
 
   @override
-  _CartCounterState createState() => _CartCounterState();
+  _CartCounterState createState() => _CartCounterState(id: id);
 }
 
 class _CartCounterState extends State<CartCounter> {
+  int id;
+  _CartCounterState({required this.id});
   int numofItems = 0;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-      child: Row(
-        children: [
-          buildButton(Icons.remove, () {
-            if (numofItems > 0)
-              setState(() {
-                numofItems--;
-              });
-          }),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: kDefaultPaddin / 2),
-            child: Text(
-              numofItems.toString().padLeft(2, "0"),
-              style: Theme.of(context).textTheme.headline6,
+    final prov = Provider.of<AddToCart>(context, listen: false);
+    return Consumer<AddToCart>(
+      builder: (context, item, child) => SizedBox(
+        child: child,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+        child: Row(
+          children: [
+            buildButton(Icons.remove, () {
+              prov.updateCart(this.id, "remove");
+            }),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: kDefaultPaddin / 2),
+              child: Text(
+                prov.getCount(this.id).toString().padLeft(2, "0"),
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
-          ),
-          buildButton(Icons.add, () {
-            setState(() {
-              numofItems++;
-            });
-          })
-        ],
+            buildButton(Icons.add, () {
+              if (cartItems.any((element) => element.product.id == this.id)) {
+                prov.updateCart(this.id, "add");
+              } else if ((cartItems
+                      .any((element) => element.product.id != this.id) ||
+                  cartItems.isEmpty)) {
+                prov.addToCart(Cart(
+                    count: 1,
+                    product: products
+                        .firstWhere((element) => element.id == this.id)));
+              }
+            })
+          ],
+        ),
       ),
     );
   }

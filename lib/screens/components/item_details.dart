@@ -51,7 +51,9 @@ class ItemBody extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CartCounter(),
+                          CartCounter(
+                            id: product.id,
+                          ),
                           Container(
                             margin: EdgeInsets.only(right: kDefaultPaddin),
                             child: Icon(

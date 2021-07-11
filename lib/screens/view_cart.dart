@@ -1,7 +1,9 @@
+import 'package:ecom/add_to_cart.dart';
 import 'package:ecom/const.dart';
+import 'package:ecom/models/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ecom/models/product.dart';
+import 'package:provider/provider.dart';
 
 class ViewCart extends StatefulWidget {
   const ViewCart({Key? key}) : super(key: key);
@@ -11,7 +13,6 @@ class ViewCart extends StatefulWidget {
 }
 
 class _ViewCartState extends State<ViewCart> {
-  int numofItems = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,9 +30,12 @@ class _ViewCartState extends State<ViewCart> {
           ),
         ),
       ),
-      body: Container(
+      body: Consumer<AddToCart>(
+        builder: (context, cartItems, child) => Container(
+          child: child,
+        ),
         child: ListView.builder(
-          itemCount: products.length,
+          itemCount: cartItems.length,
           itemBuilder: (context, index) => Card(
             elevation: 3,
             child: Row(
@@ -41,13 +45,15 @@ class _ViewCartState extends State<ViewCart> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
+                      constraints:
+                          BoxConstraints(maxHeight: 200, maxWidth: 200),
                       padding: EdgeInsets.all(kDefaultPaddin / 2),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: products[index].color,
+                        color: cartItems[index].product.color,
                       ),
                       child: Image.asset(
-                        products[index].image,
+                        cartItems[index].product.image,
                       ),
                     ),
                   ),
@@ -62,35 +68,35 @@ class _ViewCartState extends State<ViewCart> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        products[index].title,
+                        cartItems[index].product.title,
                         style: Theme.of(context)
                             .textTheme
                             .headline5!
                             .copyWith(color: Colors.black),
                       ),
                       Text(
-                        "\$${products[index].price.toString()}\n",
+                        "\$${cartItems[index].product.price.toString()}\n",
                         style: TextStyle(fontSize: 20, color: Colors.black),
                       ),
                       Row(
                         children: [
                           buildButton(Icons.remove, () {
-                            if (numofItems > 0)
+                            if (cartItems[index].count > 0)
                               setState(() {
-                                numofItems--;
+                                cartItems[index].count--;
                               });
                           }),
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: kDefaultPaddin / 2),
                             child: Text(
-                              numofItems.toString().padLeft(2, "0"),
+                              cartItems[index].count.toString().padLeft(2, "0"),
                               style: Theme.of(context).textTheme.headline6,
                             ),
                           ),
                           buildButton(Icons.add, () {
                             setState(() {
-                              numofItems++;
+                              cartItems[index].count++;
                             });
                           })
                         ],
