@@ -16,10 +16,14 @@ class CartCounter extends StatefulWidget {
 class _CartCounterState extends State<CartCounter> {
   int id;
   _CartCounterState({required this.id});
+  String count = "";
   int numofItems = 0;
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<AddToCart>(context, listen: false);
+    setState(() {
+      count = prov.getCount(this.id).toString().padLeft(2, "0");
+    });
     return Consumer<AddToCart>(
       builder: (context, item, child) => SizedBox(
         child: child,
@@ -30,11 +34,14 @@ class _CartCounterState extends State<CartCounter> {
           children: [
             buildButton(Icons.remove, () {
               prov.updateCart(this.id, "remove");
+              setState(() {
+                count = prov.getCount(this.id).toString().padLeft(2, "0");
+              });
             }),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: kDefaultPaddin / 2),
               child: Text(
-                prov.getCount(this.id).toString().padLeft(2, "0"),
+                count,
                 style: Theme.of(context).textTheme.headline6,
               ),
             ),
@@ -49,6 +56,9 @@ class _CartCounterState extends State<CartCounter> {
                     product: products
                         .firstWhere((element) => element.id == this.id)));
               }
+              setState(() {
+                count = prov.getCount(this.id).toString().padLeft(2, "0");
+              });
             })
           ],
         ),
